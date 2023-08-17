@@ -12,5 +12,8 @@
   "devDependencies": {
     "electron": "^18.2.0",
     "electron-builder": "^24.6.3"
+  },
+  "dependencies": {
+    "js-yaml": "^4.1.0"
   }
 }
