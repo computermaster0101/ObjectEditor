@@ -1,0 +1,44 @@
+{
+  "appId": "com.objecteditor.app",
+  "productName": "Object Editor",
+  "directories": {
+    "output": "output"
+  },
+  "files": [
+    "./node_modules/**/*",
+    "./formBuilder.js",
+    "./jsonBuilder.js",
+    "./preload.js",
+    "./main.js",
+    "./mainWindow.html",
+    "./mainWindow.css"
+  ],
+  "mac": {
+    "target": "dmg",
+    "icon": "./icon.png"
+  },
+  "dmg": {
+    "contents": [
+      {
+        "x": 130,
+        "y": 220
+      },
+      {
+        "x": 410,
+        "y": 220,
+        "type": "link",
+        "path": "/Applications"
+      }
+    ]
+  },
+  "win": {
+    "target": "nsis",
+    "icon": "./icon.png"
+  },
+  "linux": {
+    "target": "deb"
+  },
+  "deb": {
+    "icon": "./icon.png"
+  }
+}

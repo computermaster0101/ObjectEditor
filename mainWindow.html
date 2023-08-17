@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Object Editor</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link id="theme-link" rel="stylesheet" type="text/css" href="mainWindow.css">
+
+</head>
+<body class="dark-mode">
+<h1>Object Editor</h1>
+<div class="button-space">
+  <button id="selectFolderButton" onclick="loadFolder()">Select Folder</button>
+  <div class="radio-group" style="display:none;">
+    <input type="radio" name="format" id="jsonFormat" value="json" checked>
+    <label for="jsonFormat">JSON</label>
+    <input type="radio" name="format" id="yamlFormat" value="yaml">
+    <label for="yamlFormat">YAML</label>
+  </div>
+</div>
+<div class="data-space">
+  <div class="column" id="files"><dl></dl></div>
+  <div class="column" id="fileData"></div>
+</div>
+<script>
+  function setFileType(){
+    const selectedFormat = document.querySelector('input[name="format"]:checked').value;
+    window.electron.setFileType(selectedFormat)
+  }
+  function loadFolder(){
+    window.electron.loadFolder();
+  }
+</script>
+</body>
+</html>

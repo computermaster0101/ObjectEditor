@@ -1,0 +1,21 @@
+field_1: this is a test string
+field_2: 7
+field_3: true
+field_4:
+  field_5:
+    field_6: nested
+    field_7: object
+    field_8: test
+  field_9:
+    field_10: 1
+    field_11: 2
+    field_12: 3
+  field_13:
+    field_14: true
+    field_15: false
+field_16:
+  - this
+  - is
+  - 1
+  - word1: test
+    word2: array

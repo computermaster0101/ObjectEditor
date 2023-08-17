@@ -1,0 +1,16 @@
+{
+  "name": "ObjectEditor",
+  "version": "2.0.0",
+  "description": "Used to view and edit json and yaml files as forms",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron main.js",
+    "build": "electron-builder"
+  },
+  "author": "Michael Herber II",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^18.2.0",
+    "electron-builder": "^24.6.3"
+  }
+}
