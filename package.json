@@ -1,6 +1,6 @@
 {
   "name": "ObjectEditor",
-  "version": "2.1.0",
+  "version": "3.0.0",
   "description": "Used to view and edit json and yaml files as forms",
   "main": "main.js",
   "scripts": {
