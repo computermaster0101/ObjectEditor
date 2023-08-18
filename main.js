@@ -8,7 +8,7 @@ const yaml = require('js-yaml');
 const jsonBuilder = require('./jsonBuilder');
 
 const isDevToolsEnabled = true;
-const supportedExtensions = ['.yml', '.yaml', '.json'];
+const supportedExtensions = ['json', 'yml', 'yaml'];
 
 class ObjectEditor {
 	constructor() {
@@ -121,7 +121,8 @@ class ObjectEditor {
 		fs.readdirSync(`${folder}`).forEach(item => {
 			let stat = fs.statSync(path.join(`${folder}`, item));
 			if (stat.isFile()) {
-				if (supportedExtensions.includes((path.extname(item)))) {
+				let itemExtension = path.extname(item).substring(1);
+				if (supportedExtensions.includes(itemExtension)) {
 					if (noFiles) {
 						noFiles = false;
 						this.mainWindow.webContents.send('addItem', folder, folder);
@@ -155,23 +156,25 @@ class ObjectEditor {
 	saveDataToDrive(formData) {
 		const jsonData = jsonBuilder.formToJson(formData);
 
-		const yamlExtensions = ['yml', 'yaml']
-		const saveData = yamlExtensions.includes(this.ext) ? yaml.dump(jsonData) : JSON.stringify(jsonData, null, 4);
-		const fileTypes = yamlExtensions.includes(this.ext) ? yamlExtensions : [ 'json' ];
+		const yamlExtensions = ['.yml', '.yaml']
 
 		dialog
 			.showSaveDialog({
 				title: `Save ${this.ext.toUpperCase()} File`,
 				defaultPath: this.file,
-				filters: [{ name: `${this.ext.toUpperCase()} Files`, extensions: fileTypes }]
+				filters: [{ name: `${this.ext.toUpperCase()} Files`, extensions: supportedExtensions }]
 			})
 			.then(result => {
 				if (!result.canceled && result.filePath) {
+					console.log(`set result to ${JSON.stringify(result)}`)
+					let saveExt = path.extname(result.filePath.substring(1))
+					console.log(`set saveExt to ${saveExt}`)
+					const saveData = yamlExtensions.includes(saveExt) ? yaml.dump(jsonData) : JSON.stringify(jsonData, null, 4);
 					try {
 						fs.writeFileSync(result.filePath, saveData, 'utf8');
-						console.log(`Saved data as ${this.ext} to ${result.filePath}`);
+						console.log(`Saved data as ${saveExt} to ${result.filePath}`);
 					} catch (error) {
-						console.error(`Error saving data to ${result.filePath} as ${this.ext}:`, error);
+						console.error(`Error saving data to ${result.filePath} as ${saveExt}:`, error);
 					}
 				}
 			});
